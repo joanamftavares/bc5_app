@@ -10,3 +10,4 @@ matplotlib
 coinmarketcapapi
 tensorflow
 streamlit_tags
+pandas_datareader
