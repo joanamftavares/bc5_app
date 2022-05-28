@@ -8,7 +8,7 @@ def app():
     col1, col2 = st.columns(2)
 
     with col1:
-        st.image('APPS//logo.png')
+        st.image('apps//logo.png')
         st.write("#### **How long have you been investing?**")
         if st.checkbox('I just started investing'):
             expander = st.expander("Here are few tips for you")
