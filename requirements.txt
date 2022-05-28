@@ -1,0 +1,11 @@
+gunicorn
+numpy
+pandas
+plotly
+streamlit
+requests
+yfinance
+sklearn
+matplotlib
+coinmarketapi
+tensorflow
