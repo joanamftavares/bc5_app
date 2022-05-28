@@ -9,3 +9,4 @@ sklearn
 matplotlib
 coinmarketcapapi
 tensorflow
+streamlit_tags
