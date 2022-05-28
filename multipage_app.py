@@ -37,7 +37,7 @@ class MultiApp:
         })
 
     def run(self):
-        app= st.sidebar.image('APPS//logo2.png', use_column_width=True)
+        app= st.sidebar.image('apps//logo2.png', use_column_width=True)
         app = st.sidebar.radio(
             'DASHBOARDS',
             self.apps,
