@@ -7,5 +7,5 @@ requests
 yfinance
 sklearn
 matplotlib
-coinmarketapi
+coinmarketcapapi
 tensorflow
