@@ -6,30 +6,29 @@ import numpy as np
 import pandas as pd
 from itertools import cycle
 import plotly.express as px
-#pip install yfinance
+# pip install yfinance
 import yfinance as yf
 import time
 import pandas_datareader as pdr
 
 
 def app():
-    START = "2020-05-31"
-    #current date
-    TODAY= date.today().strftime("%Y-%m-%d")
+    START = "2019-05-05"
+    # current date
+    TODAY = date.today().strftime("%Y-%m-%d")
 
-#---------------------------------------------COLLECTING DATA ----------------------------------------------------------------#
-    #import the data
+    # ---------------------------------------------COLLECTING DATA ----------------------------------------------------------------#
+    # import the data
     df_V = yf.download(tickers='V', start="2020-05-31", end=TODAY)
-    df_NVDA = yf.download(tickers='NVDA',start="2020-05-31", end=TODAY)
+    df_NVDA = yf.download(tickers='NVDA', start="2020-05-31", end=TODAY)
     df_UNH = yf.download(tickers='UNH', start="2020-05-31", end=TODAY)
-    df_JNJ = yf.download(tickers='JNJ',start="2020-05-31", end=TODAY)
-    df_FB = yf.download(tickers='FB',start="2020-05-31", end=TODAY)
-    df_TSLA = yf.download(tickers='TSLA',start="2020-05-31", end=TODAY)
-    df_AMZN = yf.download(tickers='AMZN',start="2020-05-31", end=TODAY)
-    df_AAPL = yf.download(tickers='AAPL',start="2020-05-31", end=TODAY)
-    df_GOOG = yf.download(tickers='GOOG',start="2020-05-31", end=TODAY)
-    df_MSFT = yf.download(tickers='MSFT',start="2020-05-31", end=TODAY)
-
+    df_JNJ = yf.download(tickers='JNJ', start="2020-05-31", end=TODAY)
+    df_FB = yf.download(tickers='FB', start="2020-05-31", end=TODAY)
+    df_TSLA = yf.download(tickers='TSLA', start="2020-05-31", end=TODAY)
+    df_AMZN = yf.download(tickers='AMZN', start="2020-05-31", end=TODAY)
+    df_AAPL = yf.download(tickers='AAPL', start="2020-05-31", end=TODAY)
+    df_GOOG = yf.download(tickers='GOOG', start="2020-05-31", end=TODAY)
+    df_MSFT = yf.download(tickers='MSFT', start="2020-05-31", end=TODAY)
 
     df_V['Date'] = df_V.index
     df_NVDA['Date'] = df_NVDA.index
@@ -45,6 +44,9 @@ def app():
     pallete = cycle(px.colors.sequential.Viridis)
 
     st.title("Stock Market Summary", anchor=0.5)
+
+    st.info(
+        'For a market overview, we have selected the best 10 stocks to buy in the year 2022 according to marketcap. If you want to know more, check this [link](https://companiesmarketcap.com/)')
 
     marketCap_V = pdr.get_quote_yahoo('V')['marketCap']
     marketCap_NVDA = pdr.get_quote_yahoo('NVDA')['marketCap']
@@ -69,49 +71,27 @@ def app():
     marketCap_MSFT = pd.DataFrame(marketCap_MSFT)
     marketCap_NVDA = pd.DataFrame(marketCap_NVDA)
 
-    df_marketcap = pd.concat([marketCap_V , marketCap_NVDA, marketCap_UNH, marketCap_JNJ, marketCap_FB, marketCap_TSLA, marketCap_AMZN,
-                                marketCap_AAPL,marketCap_GOOG, marketCap_MSFT ], axis=0)
+    df_marketcap = pd.concat(
+        [marketCap_V, marketCap_NVDA, marketCap_UNH, marketCap_JNJ, marketCap_FB, marketCap_TSLA, marketCap_AMZN,
+         marketCap_AAPL, marketCap_GOOG, marketCap_MSFT], axis=0)
 
     df_marketcap['Name'] = df_marketcap.index
 
-#------------------------------------------------ Visualizations ----------------------------------------------------------------#
-    col1, col2, col3 = st.columns(3)
-    with col1:
-        st.write("")
-    with col2:
-
-        st.header('Treemap Stocks by Market Cap', anchor=0.5)
-
-        fig8 = go.Figure()
-        fig8 = px.treemap(df_marketcap, path=['Name'],
-                     values='marketCap')
-
-        fig8.update_layout(treemapcolorway = ["#bddf26", "#7ad151", "#44bf70", "#22a884", "#21918c", "#2a788e", "#355f8d", "#414487", "#482475"])
-        st.plotly_chart(fig8)
-    with col3:
-        st.write("")
-
-
-
+    # ------------------------------------------------ Visualizations ----------------------------------------------------------------#
 
     col1, col2 = st.columns(2)
 
     with col1:
+        st.header('Treemap Stocks by Market Cap', anchor=0.5)
 
-        st.header('Most Popular Stocks', anchor=0.5)
+        fig8 = go.Figure()
+        fig8 = px.treemap(df_marketcap, path=['Name'],
+                          values='marketCap')
 
-        fig1 = go.Figure(go.Bar(
-                x=[df_V['Close'].mean(),df_NVDA['Close'].mean(),
-                df_UNH['Close'].mean(), df_JNJ['Close'].mean(), df_FB['Close'].mean(), df_TSLA['Close'].mean(),
-                df_AMZN['Close'].mean(), df_AAPL['Close'].mean(), df_GOOG['Close'].mean(), df_MSFT['Close'].mean()],
-                y=['V', 'NVDA', 'UNH', 'JNJ', 'FB', 'TSLA', 'AMZN', 'AAPL', 'GOOG', 'MSFT'],
-                marker_color=next(pallete),
-                orientation='h'))
-
-        fig1.update_layout(xaxis=dict(showgrid=False),yaxis=dict(showgrid=False))
-
-        st.plotly_chart(fig1)
-
+        fig8.update_layout(
+            treemapcolorway=["#bddf26", "#7ad151", "#44bf70", "#22a884", "#21918c", "#2a788e", "#355f8d", "#414487",
+                             "#482475"])
+        st.plotly_chart(fig8)
 
     with col2:
         st.header('Closing Price Over Time', anchor=0.5)
@@ -128,46 +108,40 @@ def app():
         fig3.add_trace(go.Scatter(x=df_GOOG['Date'], y=df_GOOG['Close'], name='GOOG', marker_color=next(pallete)))
         fig3.add_trace(go.Scatter(x=df_MSFT['Date'], y=df_MSFT['Close'], name='MSFT', marker_color=next(pallete)))
 
-        fig3.update_layout(xaxis=dict(showgrid=False),yaxis=dict(showgrid=False))
+        fig3.update_layout(xaxis=dict(showgrid=False), yaxis=dict(showgrid=False))
 
         st.plotly_chart(fig3)
-
-
 
     col1, col2 = st.columns(2)
 
     with col1:
-
         st.header('Stocks Volume', anchor=0.5)
 
         fig2 = go.Figure(go.Bar(
-                x=[df_V['Volume'].mean(),df_NVDA['Volume'].mean(),
-                df_UNH['Volume'].mean(), df_JNJ['Volume'].mean(), df_FB['Volume'].mean(), df_TSLA['Volume'].mean(),
-                df_AMZN['Volume'].mean(), df_AAPL['Volume'].mean(), df_GOOG['Volume'].mean(), df_MSFT['Volume'].mean()],
-                y=['V', 'NVDA', 'UNH', 'JNJ', 'FB', 'TSLA', 'AMZN', 'AAPL', 'GOOG', 'MSFT'],
-                marker_color=next(pallete),
-                orientation='h'))
+            x=[df_V['Volume'].mean(), df_NVDA['Volume'].mean(),
+               df_UNH['Volume'].mean(), df_JNJ['Volume'].mean(), df_FB['Volume'].mean(), df_TSLA['Volume'].mean(),
+               df_AMZN['Volume'].mean(), df_AAPL['Volume'].mean(), df_GOOG['Volume'].mean(), df_MSFT['Volume'].mean()],
+            y=['V', 'NVDA', 'UNH', 'JNJ', 'FB', 'TSLA', 'AMZN', 'AAPL', 'GOOG', 'MSFT'],
+            marker_color=next(pallete),
+            orientation='h'))
 
-        fig2.update_layout(xaxis=dict(showgrid=False),yaxis=dict(showgrid=False))
+        fig2.update_layout(xaxis=dict(showgrid=False), yaxis=dict(showgrid=False))
 
         st.plotly_chart(fig2)
 
-
     with col2:
-
         st.header('Price Variation Over Time', anchor=0.5)
 
-        df_5_V= df_V['Open']- df_V['Close']
-        df_5_NVDA= df_NVDA['Open']- df_NVDA['Close']
-        df_5_UNH= df_UNH['Open']- df_UNH['Close']
-        df_5_JNJ= df_JNJ['Open']- df_JNJ['Close']
-        df_5_FB= df_FB['Open']- df_FB['Close']
-        df_5_TSLA= df_TSLA['Open']- df_TSLA['Close']
-        df_5_AMZN = df_AMZN['Open']- df_AMZN['Close']
-        df_5_AAPL = df_AAPL['Open']- df_AAPL['Close']
-        df_5_GOOG = df_GOOG['Open']- df_GOOG['Close']
-        df_5_MSFT = df_MSFT['Open']- df_MSFT['Close']
-
+        df_5_V = df_V['Open'] - df_V['Close']
+        df_5_NVDA = df_NVDA['Open'] - df_NVDA['Close']
+        df_5_UNH = df_UNH['Open'] - df_UNH['Close']
+        df_5_JNJ = df_JNJ['Open'] - df_JNJ['Close']
+        df_5_FB = df_FB['Open'] - df_FB['Close']
+        df_5_TSLA = df_TSLA['Open'] - df_TSLA['Close']
+        df_5_AMZN = df_AMZN['Open'] - df_AMZN['Close']
+        df_5_AAPL = df_AAPL['Open'] - df_AAPL['Close']
+        df_5_GOOG = df_GOOG['Open'] - df_GOOG['Close']
+        df_5_MSFT = df_MSFT['Open'] - df_MSFT['Close']
 
         fig5 = go.Figure()
         fig5.add_trace(go.Scatter(x=df_V['Date'], y=df_5_V, name='V', marker_color=next(pallete)))
@@ -181,6 +155,6 @@ def app():
         fig5.add_trace(go.Scatter(x=df_GOOG['Date'], y=df_5_GOOG, name='GOOG', marker_color=next(pallete)))
         fig5.add_trace(go.Scatter(x=df_MSFT['Date'], y=df_5_MSFT, name='MSFT', marker_color=next(pallete)))
 
-        fig5.update_layout(xaxis=dict(showgrid=False),yaxis=dict(showgrid=False))
+        fig5.update_layout(xaxis=dict(showgrid=False), yaxis=dict(showgrid=False))
 
         st.plotly_chart(fig5)
