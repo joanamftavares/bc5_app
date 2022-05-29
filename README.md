@@ -1,8 +1,8 @@
-Project Context:
+## Project Context:
 Investments4Some is a long-standing Portuguese, privately held hedge funds management firm. They have been exploring Machine Learning models for market price forecasting, which is used to anticipate market trends. Our team was hired by Warner Buffer and Gil Bates, partners of Investments4Some, to develop a dashboard for their financial analysts. 
 This Dashboard was thought as a tool to assist the internal financial team and external stakeholders in the investment planning, allowing them to collect useful insights and deeper knowledge about any arbitrary stock and digital currency, thus improving the quality of their portfolios and provide an easy way to keep track of the market trends.
 
-Description of the Dashboard:
+## Description of the Dashboard:
 The dashboard was built using streamlit and is composed of multiple pages, namely Home Page, Crypto Market Summary, Stock Market Summary, Trend Analysis, Forecast and Portfolio Page.
 In the Home Page, the investor can take a short quiz to find out which type of investor he/she is and, for new investors, some tips are provided.
 The Market Summary pages display important visualizations regarding the most important stocks and crypto currencies up to this date, such as market capitalization, volume, and volatility. 
