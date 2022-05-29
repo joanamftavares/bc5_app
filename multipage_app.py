@@ -43,3 +43,9 @@ class MultiApp:
             self.apps,
             format_func=lambda app: app['title'])
         app['function']()
+        with st.sidebar:
+            for i in range(0,20):
+                st.write("")
+            st.write("### Developed by:")
+            st.write("#### Group Z")
+            st.markdown("###### Leonor Vital, Joana Tavares, Maria Oliveira, Laura Santos")
