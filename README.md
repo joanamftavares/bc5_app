@@ -17,6 +17,7 @@ The dashboard is composed of multiple pages, namely Home Page, Crypto Market Sum
 - The Forecast page includes the predictions for the close price and the user can use this forecasting tool for any stock or crypto and choose the time frame for the predicting, up to 10 days. Similarly to the trend analysis, the investor can benefit from this forecasting tool for any stock or cryptocurrency. The prediction model is an univariate LSTM that uses TensorFlow. In order to reduce the time the predictions were displayed in the app, after training the model, we saved it in a HDF5 file, and every time a different prediction is made in the app, it loads the compiled model identical to the one we saved. 
 - Finally, the Portfolio page is dedicated to each individual investor profile and designed to assist the assessment of the performance of acquired stocks, which can support the planning of future investments. The investors can insert the stocks and digital currencies they own, and additionally provide information about their respective acquisition to take advantage of the complete analysis offered in this page.
 
+The data is daily updated and automatically downloaded from *yfinance* – Yahoo! Finance’s API.
 The dashboard was built using streamlit and the plots using Plotly. The dashboard can be run following the command “streamlit run app.py”, but was also deployed and the app is live in this link: https://bc5-5w01.onrender.com/
 
 **Home Page**
