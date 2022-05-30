@@ -10,7 +10,7 @@ Investments4Some is a long-standing Portuguese, privately held hedge funds manag
 This Dashboard was thought as a tool to assist the internal financial team and external stakeholders in the investment planning, allowing them to collect useful insights and deeper knowledge about any arbitrary stock and digital currency, thus improving the quality of their portfolios and provide an easy way to keep track of the market trends.
 
 ## Description of the Dashboard:
-The dashboard was built using streamlit and is composed of multiple pages, namely Home Page, Crypto Market Summary, Stock Market Summary, Trend Analysis, Forecast and Portfolio Page (available inside the folder "Apps").
+The dashboard is composed of multiple pages, namely Home Page, Crypto Market Summary, Stock Market Summary, Trend Analysis, Forecast and Portfolio Page (available inside the folder "Apps").
 - In the Home Page, the investor can take a short quiz to find out which type of investor he/she is and, for new investors, some tips are provided.
 - The Market Summary pages display important visualizations regarding the most important stocks and crypto currencies up to this date, such as market capitalization, volume, and volatility. 
 - The Trend Analysis page includes plots from 3 key indicators such as Moving Average (MA), Moving Average Convergence Divergence (MACD) and Relative Strength Index (RSI) indicators, and a candlestick plot. This page is personalized for each stock or crypto the user wishes to analyze, which can be achieved through the input of the symbol in the input box on the top of the page.
